@@ -8,10 +8,10 @@ class TestApp(unittest.TestCase):
         # Redirigir la salida estándar a un StringIO para capturar el output de la función main
         captured_output = StringIO()
         sys.stdout = captured_output
-
+        
         # Llamar a la función main
         main()
-
+        
         # Restaurar la salida estándar y comparar el resultado
         sys.stdout = sys.__stdout__
         self.assertEqual(captured_output.getvalue().strip(), "Hola, Mundo")
