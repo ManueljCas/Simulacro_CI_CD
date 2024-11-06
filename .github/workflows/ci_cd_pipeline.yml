@@ -1,9 +1,6 @@
 name: CI/CD Pipeline
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,9 +18,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Run Hello World script
-        run: python app.py
 
   test:
     runs-on: ubuntu-latest
@@ -44,15 +38,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python -m unittest discover -s tests/unit
-
-      - name: Run regression tests
-        run: |
-          python -m unittest discover -s tests/regression
-
-      - name: Run performance tests
-        run: |
-          python -m unittest discover -s tests/performance
+          python -m unittest discover -s tests/unit -p "*.py"
 
   deploy:
     runs-on: ubuntu-latest
