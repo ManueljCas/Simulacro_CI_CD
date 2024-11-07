@@ -90,3 +90,33 @@ jobs:
         run: |
           # Aquí se agregaría el script de despliegue específico para producción
           echo "Desplegando en producción..."
+          # Ejemplo de comando de despliegue:
+          # ./deploy_production.sh
+
+  monitoring:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: success()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Collect monitoring metrics
+        run: |
+          # Aquí se agregaría el script de monitoreo para recopilar métricas
+          echo "Recopilando métricas de monitoreo..."
+          # Ejemplo de comando de monitoreo:
+          # ./monitoring_metrics.sh
+          
+      - name: Log metrics
+        run: |
+          # Simulación de registro de métricas
+          echo "Registrando métricas de rendimiento y disponibilidad..."
+          echo "CPU usage: $(top -b -n1 | grep 'Cpu(s)')"
+          echo "Memory usage: $(free -m)"
+          echo "Network usage: $(ifconfig)"
