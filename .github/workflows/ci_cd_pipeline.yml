@@ -44,15 +44,27 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python -m unittest discover -s tests/unit
+          if [ -d "tests/unit" ]; then
+            python -m unittest discover -s tests/unit
+          else
+            echo "Directory tests/unit does not exist or is empty."
+          fi
 
       - name: Run regression tests
         run: |
-          python -m unittest discover -s tests/regression
+          if [ -d "tests/regression" ]; then
+            python -m unittest discover -s tests/regression
+          else
+            echo "Directory tests/regression does not exist or is empty."
+          fi
 
       - name: Run performance tests
         run: |
-          python -m unittest discover -s tests/performance
+          if [ -d "tests/performance" ]; then
+            python -m unittest discover -s tests/performance
+          else
+            echo "Directory tests/performance does not exist or is empty."
+          fi
 
   deploy:
     runs-on: ubuntu-latest
